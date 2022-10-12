@@ -1,8 +1,11 @@
+import TickersListHeader from "../components/TickersListHeader";
 
 
 const Interesting = () => {
     return (
-        <div>Interesting</div>
+        <main className="main">
+            <TickersListHeader />
+        </main>
     );
 };
 

@@ -1,17 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from "axios";
 
 const initialState = {
     items: [],
     status: 'loading',
 };
 
-export const fetchTickers = createAsyncThunk(
+export const fetchTickers = (cb) => createAsyncThunk(
     'tickers/fetchTickers',
-    async () => {
-        const { data } = await axios.get(`http://localhost:4000`);
-        return data
-    }
+    cb
 );
 
 export const tickersSlice = createSlice({
@@ -38,7 +34,7 @@ export const tickersSlice = createSlice({
     },
 });
 
-/* export const selectTickerData = (state) => state.rickers; */
+ export const selectTickerData = ({tickers}) => tickers.items;
 
 export const { setItems } = tickersSlice.actions;
 

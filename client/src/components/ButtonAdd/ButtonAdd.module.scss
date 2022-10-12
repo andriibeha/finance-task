@@ -1,0 +1,16 @@
+.button { 
+    background-color: inherit;
+    padding: 5px 10px;
+    font-size: 15px;
+
+    border: 1px solid #fe5f1e;
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    &:hover { 
+        background-color: #fe5f1e;
+
+        color: white;
+    }
+}
