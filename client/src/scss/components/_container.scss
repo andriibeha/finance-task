@@ -1,3 +1,10 @@
-.container { 
-    padding: 50px;
+.wrapper { 
+    padding: 25px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 1fr 50px;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
 }
+

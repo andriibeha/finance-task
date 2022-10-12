@@ -1,0 +1,14 @@
+.root { 
+    font-size: 20px;
+    color: grey;
+
+    margin-left: 50px;
+}
+
+.list { 
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 15px;
+    grid-row-gap: 0px;
+}

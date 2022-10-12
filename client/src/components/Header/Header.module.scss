@@ -1,0 +1,23 @@
+.header { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 20px;
+}
+
+.list { 
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item {
+    &:last-child { 
+        margin-right: 0;
+    }
+
+    &__active { 
+        color: #fe5f1e;
+    }
+}

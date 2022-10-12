@@ -9,7 +9,7 @@ const initialState = {
 export const fetchTickers = createAsyncThunk(
     'tickers/fetchTickers',
     async () => {
-        const { data } = await axios.get(``);
+        const { data } = await axios.get(`http://localhost:4000`);
         return data
     }
 );
