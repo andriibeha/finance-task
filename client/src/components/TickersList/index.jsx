@@ -1,11 +1,26 @@
-import { useSelector } from "react-redux";
-import { selectTickerData } from "../../redux/slices/tickersSlice";
-import ButtonAdd from "../ButtonAdd";
+import { useDispatch, useSelector } from "react-redux";
+import { selectTickerData } from "../../redux/selectors/selectTickerData";
+import { addItem } from "../../redux/slices/interestingSlice";
 
 import s from "./TickersList.module.scss";
 
 const TickersList = () => {
+    const dispatch = useDispatch();
     const tickers = useSelector(selectTickerData);
+
+    const onButtonAddClick = (ticker) => {
+        dispatch(addItem(ticker))
+    };
+
+    if (tickers.length === 0) { 
+        return (
+            <div className={s.root}>
+                <div className={s.center}>
+                    <div className={s.loader}></div>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div className={s.root}>
@@ -31,7 +46,11 @@ const TickersList = () => {
                         <div className={s.wraper}>
                             {item.dividend}
                             <div className={s.container}>
-                                <ButtonAdd />
+                                <button type="button"
+                                    className={s.button}
+                                    onClick={() => onButtonAddClick(item)}>
+                                    add+
+                                </button>
                             </div>
                         </div>
                     </li>
@@ -41,4 +60,4 @@ const TickersList = () => {
     );
 };
 
-export default TickersList
+export default TickersList;
