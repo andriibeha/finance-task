@@ -1,6 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+import { TickersItems } from './tickersSlice';
 
-const initialState = {
+interface InterestingSliceState {
+    items: TickersItems[]
+}
+
+const initialState: InterestingSliceState = {
     items: [],
 };
 

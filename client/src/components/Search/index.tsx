@@ -1,12 +1,11 @@
-
 import { useState } from "react";
 import s from "./Serach.module.scss";
 
 
-const Serach = () => {
+const Serach: React.FC = () => {
     const [value, setValue] = useState('');
 
-    const onChangeInput = (e) => {
+    const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
     };
 

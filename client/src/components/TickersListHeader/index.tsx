@@ -1,7 +1,6 @@
-
 import s from "./TickersListHeader.module.scss";
 
-const TickersListHeader = () => {
+const TickersListHeader: React.FC = () => {
   return (
     <>
       <div className={s.root}>

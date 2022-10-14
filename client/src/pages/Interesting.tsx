@@ -2,7 +2,7 @@ import InterestingBlock from "../components/InterestingBlock";
 import TickersListHeader from "../components/TickersListHeader";
 
 
-const Interesting = () => {
+const Interesting: React.FC = () => {
     return (
         <main className="main">
             <TickersListHeader />

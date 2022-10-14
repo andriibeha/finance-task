@@ -1,1 +1,0 @@
-export const selectTickerData = ({ tickers }) => tickers.items;

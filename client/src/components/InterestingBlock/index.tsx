@@ -1,15 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { selectInterestingData } from "../../redux/selectors/selectInterestingData";
 import { removeItem } from "../../redux/slices/interestingSlice";
+import { TickersItems } from "../../redux/slices/tickersSlice";
+import { useAppDispatch } from "../../redux/store";
 
 import s from "./InterestingBlock.module.scss";
 
 
-const InterestingBlock = () => {
+const InterestingBlock: React.FC = () => {
     const interestingTickers = useSelector(selectInterestingData);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const onButtonAddClick = (item) => {
+    const onButtonAddClick = (item: TickersItems) => {
         dispatch(removeItem(item));
     }
 
@@ -34,12 +37,12 @@ const InterestingBlock = () => {
                         ${item.price}
                     </li>
                     <li className={s.item}>
-                        <div className={item.change > 0 ? s.item__green : s.item__red}>
+                        <div className={Number(item.change) > 0 ? s.item__green : s.item__red}>
                             {item.change}
                         </div>
                     </li>
                     <li className={s.item}>
-                        <div className={item.change > 0 ? s.item__green : s.item__red}>
+                        <div className={Number(item.change) > 0 ? s.item__green : s.item__red}>
                             {item.change_percent}%
                         </div>
                     </li>

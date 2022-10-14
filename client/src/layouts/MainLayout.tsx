@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import Header from "../components/Header";
 
 
-const MainLayout = () => {
+const MainLayout: React.FC = () => {
 
     return (
         <div className="wrapper">

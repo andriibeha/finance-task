@@ -1,14 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectTickerData } from "../../redux/selectors/selectTickerData";
 import { addItem } from "../../redux/slices/interestingSlice";
+import { TickersItems } from "../../redux/slices/tickersSlice";
+import { useAppDispatch } from "../../redux/store";
 
 import s from "./TickersList.module.scss";
 
-const TickersList = () => {
-    const dispatch = useDispatch();
+const TickersList: React.FC = () => {
+    const dispatch = useAppDispatch();
     const tickers = useSelector(selectTickerData);
 
-    const onButtonAddClick = (ticker) => {
+    const onButtonAddClick = (ticker: TickersItems) => {
         dispatch(addItem(ticker));
     };
 
@@ -22,7 +24,6 @@ const TickersList = () => {
         );
     };
 
-
     return (
         <div className={s.root}>
             {tickers.map((item) => (
@@ -34,12 +35,12 @@ const TickersList = () => {
                         ${item.price}
                     </li>
                     <li className={s.item}>
-                        <div className={item.change > 0 ? s.item__green : s.item__red}>
+                        <div className={Number(item.change) > 0 ? s.item__green : s.item__red}>
                             {item.change}
                         </div>
                     </li>
                     <li className={s.item}>
-                        <div className={item.change > 0 ? s.item__green : s.item__red}>
+                        <div className={Number(item.change) > 0 ? s.item__green : s.item__red}>
                             {item.change_percent}%
                         </div>
                     </li>

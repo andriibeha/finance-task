@@ -1,5 +1,7 @@
-import React,{ useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { setItems, TickersItems } from "./redux/slices/tickersSlice";
+import { useAppDispatch } from "./redux/store";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Interesting from "./pages/Interesting";
@@ -7,15 +9,13 @@ import NotFound from "./pages/NotFound";
 import WebSocketService from './services/socket'
 
 import "./scss/app.scss"
-import { setItems } from "./redux/slices/tickersSlice";
-import { useDispatch } from "react-redux";
 
-const SERVER = 'http://localhost:4000/'
+const SERVER: string = 'http://localhost:4000/' ;
 
-const App = () => {
-  const dispatch = useDispatch();
+const App: React.FC = () => {
+  const dispatch = useAppDispatch();
 
-  const handleTicker = useCallback((data) => {
+  const handleTicker = useCallback((data: TickersItems[]) => {
     dispatch(setItems(data));
   },[dispatch]);
 

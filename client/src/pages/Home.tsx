@@ -1,7 +1,7 @@
 import TickersList from "../components/TickersList";
 import TickersListHeader from "../components/TickersListHeader";
 
-const Home = () => {
+const Home: React.FC = () => {
     return (
         <main className="main">
             <TickersListHeader />

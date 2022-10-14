@@ -3,8 +3,7 @@ import Serach from "../Search";
 
 import s from "./Header.module.scss";
 
-
-const Header = () => {
+const Header: React.FC = () => {
     const { pathname } = useLocation();
 
     return (

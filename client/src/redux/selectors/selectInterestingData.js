@@ -1,1 +1,0 @@
-export const selectInterestingData = ({interesting}) => interesting.items;

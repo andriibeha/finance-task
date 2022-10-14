@@ -2,7 +2,7 @@
 import s from "./Footer.module.scss";
 import icon from "../../assets/img/github.svg";
 
-const Footer = () => {
+const Footer: React.FC = () => {
     return (
         <footer className={s.footer}>
             <p className={s.description}>Created by <b>Andrii Beha</b></p>
