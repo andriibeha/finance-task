@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import Serach from "../Search";
 
 import s from "./Header.module.scss";
 
@@ -10,7 +11,7 @@ const Header = () => {
         <header className={s.header}>
             <div>LOGO</div>
             <div>
-                SEARCH
+                <Serach />
             </div>
             <ul className={s.list}>
                 <li>

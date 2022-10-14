@@ -1,14 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectInterestingData } from "../../redux/selectors/selectInterestingData";
+import { removeItem } from "../../redux/slices/interestingSlice";
 
 import s from "./InterestingBlock.module.scss";
 
 
 const InterestingBlock = () => {
     const interestingTickers = useSelector(selectInterestingData);
+    const dispatch = useDispatch();
 
-    const onButtonAddClick = () => {
-        console.log("remove")
+    const onButtonAddClick = (item) => {
+        dispatch(removeItem(item));
     }
 
     if (interestingTickers.length === 0) { 
@@ -48,7 +50,7 @@ const InterestingBlock = () => {
                                 <button type="button"
                                     className={s.button}
                                     onClick={() => onButtonAddClick(item)}>
-                                    add+
+                                    remove-
                                 </button>
                             </div>
                         </div>

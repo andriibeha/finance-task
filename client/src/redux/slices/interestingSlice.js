@@ -15,10 +15,14 @@ export const interestingSlice = createSlice({
                 state.items.push(action.payload);
             };
         },
+        removeItem(state, action) {
+            const itemIndex = action.payload;
+            state.items.splice(itemIndex, 1);
+        }
     },
 });
 
 
-export const { addItem } = interestingSlice.actions;
+export const { addItem, removeItem } = interestingSlice.actions;
 
 export default interestingSlice.reducer;

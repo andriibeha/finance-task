@@ -9,7 +9,7 @@ const TickersList = () => {
     const tickers = useSelector(selectTickerData);
 
     const onButtonAddClick = (ticker) => {
-        dispatch(addItem(ticker))
+        dispatch(addItem(ticker));
     };
 
     if (tickers.length === 0) { 
@@ -21,6 +21,7 @@ const TickersList = () => {
             </div>
         );
     };
+
 
     return (
         <div className={s.root}>
