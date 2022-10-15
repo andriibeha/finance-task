@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import { MainScreeenNavigationProps } from "../common/types";
+import { MainScreeenNavigationProps } from "../TypeNavigetaProps/types";
 import TickersList from "../components/TickersList";
 import TickersListHeader from "../components/TickersListHeader";
 

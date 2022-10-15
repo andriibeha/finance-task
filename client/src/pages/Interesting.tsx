@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useOutletContext } from "react-router-dom";
-import { MainScreeenNavigationProps } from "../common/types";
+import { MainScreeenNavigationProps } from "../TypeNavigetaProps/types";
 import { selectInterestingData } from "../redux/selectors/selectInterestingData";
 import { selectTickerData } from "../redux/selectors/selectTickerData";
 import { TickersItems } from "../redux/slices/tickersSlice";
