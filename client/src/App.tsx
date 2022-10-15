@@ -6,7 +6,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Interesting from "./pages/Interesting";
 import NotFound from "./pages/NotFound";
-import WebSocketService from './services/socket'
+import WebSocketService from './services/socket';
 
 import "./scss/app.scss"
 
@@ -24,7 +24,7 @@ const App: React.FC = () => {
     WebSocketService.emit('start');
     WebSocketService.on('ticker', handleTicker);
     return () => WebSocketService.emit('disconnect');
-  },[])
+  }, [handleTicker]);
   
   return (
     <Routes>

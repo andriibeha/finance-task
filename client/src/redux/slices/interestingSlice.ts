@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TickersItems } from './tickersSlice';
+
 
 interface InterestingSliceState {
     items: TickersItems[]
@@ -13,7 +14,10 @@ export const interestingSlice = createSlice({
     name: 'interesting',
     initialState,
     reducers: {
-        addItem(state, action) {
+        setTickerItems(state, action: PayloadAction<TickersItems[]>) {
+            state.items = action.payload;
+        },
+        addItem(state, action: PayloadAction<TickersItems>) {
             const findItem = state.items.find((obj) => obj.ticker === action.payload.ticker);
 
             if (!findItem) {
@@ -28,6 +32,6 @@ export const interestingSlice = createSlice({
 });
 
 
-export const { addItem, removeItem } = interestingSlice.actions;
+export const { addItem, removeItem, setTickerItems } = interestingSlice.actions;
 
 export default interestingSlice.reducer;
