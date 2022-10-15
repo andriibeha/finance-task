@@ -3,8 +3,8 @@ import { TickersItems } from './tickersSlice';
 
 
 interface InterestingSliceState {
-    items: TickersItems[]
-}
+    items: number[]
+};
 
 const initialState: InterestingSliceState = {
     items: [],
@@ -14,15 +14,15 @@ export const interestingSlice = createSlice({
     name: 'interesting',
     initialState,
     reducers: {
-        setTickerItems(state, action: PayloadAction<TickersItems[]>) {
+        setTickerItems(state, action: PayloadAction<number[]>) {
             state.items = action.payload;
         },
         addItem(state, action: PayloadAction<TickersItems>) {
-            const findItem = state.items.find((obj) => obj.ticker === action.payload.ticker);
-
-            if (!findItem) {
-                state.items.push(action.payload);
-            };
+            const tickerId = action.payload.id;
+            const index = state.items.indexOf(tickerId);
+            if(index === -1) {
+                state.items = [...state.items,tickerId];
+            }
         },
         removeItem(state, action) {
             const itemIndex = action.payload;

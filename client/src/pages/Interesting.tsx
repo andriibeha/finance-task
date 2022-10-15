@@ -1,34 +1,33 @@
-import { useCallback, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useOutletContext } from "react-router-dom";
+import { MainScreeenNavigationProps } from "../common/types";
+import { selectInterestingData } from "../redux/selectors/selectInterestingData";
+import { selectTickerData } from "../redux/selectors/selectTickerData";
+import { TickersItems } from "../redux/slices/tickersSlice";
 import InterestingBlock from "../components/InterestingBlock";
 import TickersListHeader from "../components/TickersListHeader";
-import { setTickerItems } from "../redux/slices/interestingSlice";
-import { TickersItems } from "../redux/slices/tickersSlice";
-import { useAppDispatch } from "../redux/store";
-import WebSocketService from '../services/socket'
-
-const SERVER: string = 'http://localhost:4000' ;
 
 const Interesting: React.FC = () => {
-
-    const dispatch = useAppDispatch();
-
-    const handleTicker = useCallback((data: TickersItems[]) => {
-        console.log("data", data)
-        dispatch(setTickerItems(data));
-    }, [dispatch]);
-
+    const [interestingTickers, setInterestingTickers] = useState<TickersItems[]>([]);
+    const {search} = useOutletContext<MainScreeenNavigationProps>();
+    const interestingTickersIDs = useSelector(selectInterestingData);
+    const tickers = useSelector(selectTickerData);
 
     useEffect(() => {
-        WebSocketService.establishConnection(SERVER);
-        WebSocketService.emit('start');
-        WebSocketService.on('user', handleTicker);
-        /* return () => WebSocketService.emit('disconnect'); */
-    }, [handleTicker]);
+        const filteredTickers = tickers.filter(item =>
+            interestingTickersIDs.indexOf(item.id) !== -1 &&
+            item.ticker.toLowerCase().search(search.toLowerCase()) >= 0
+        );
 
+        setInterestingTickers(filteredTickers);
+
+    }, [tickers, interestingTickersIDs, search]);
+    
     return (
         <main className="main">
             <TickersListHeader />
-            <InterestingBlock />
+            <InterestingBlock tickers={interestingTickers} />
         </main>
     );
 };

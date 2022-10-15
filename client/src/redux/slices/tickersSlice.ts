@@ -1,7 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+type Ticker = 'AAPL' | 'GOOGL' | 'MSFT' | 'AMZN' | 'FB' | 'TSLA';
 
-export type TickersItems = Record<string, string>;
+export type TickersItems = {
+    id: number,
+    ticker: Ticker,
+    exchange: string,
+    price: string,
+    change: string,
+    change_percent: string,
+    dividend: string,
+    yield: string,
+    last_trade_time: string,
+};
 
 interface TickersSlickeState { 
     items: TickersItems[]

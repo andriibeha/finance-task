@@ -28,7 +28,8 @@ function utcDate() {
 
 function getQuotes(socket) {
 
-  const quotes = tickers.map(ticker => ({
+  const quotes = tickers.map((ticker, i) => ({
+    id: i,
     ticker,
     exchange: 'NASDAQ',
     price: randomValue(100, 300, 2),
@@ -75,56 +76,6 @@ socketServer.on('connection', (socket) => {
     trackTickers(socket);
   });
 });
-
-//--------------------------------------------------------------------
-function getQuotesByTicker(socket) {
-
-  const user = tickers.map(ticker => ({
-    ticker,
-    exchange: 'NASDAQ',
-    price: randomValue(100, 300, 2),
-    change: randomValue(0, 200, 2),
-    change_percent: randomValue(0, 1, 2),
-    dividend: randomValue(0, 1, 2),
-    yield: randomValue(0, 2, 2),
-    last_trade_time: utcDate(),
-  })).filter(item => item.ticker === "AAPL" || item.ticker === "GOOGL");
-
-  socket.emit('user', user);
-}
-
-
-function trackUser(socket) {
-  // run the first time immediately
-  getQuotesByTicker(socket);
-
-  // every N seconds
-  const timer2 = setInterval(function() {
-    getQuotesByTicker(socket);
-  }, FETCH_INTERVAL);
-
-  socket.on('disconnect', function() {
-    clearInterval(timer2);
-  });
-}
-
-socketServer.on('connection', (socket) => {
-  socket.on('start', () => {
-    trackUser(socket);
-  });
-});
-
-socketServer.on('connection', (socket) => {
-  socket.on('start', () => {
-    trackUser(socket);
-  });
-});
-
-app.get('/user', function(req, res) {
-  res.sendFile(__dirname + '/user.html');
-});
-
-//------------------------------------------------------------------------
 
 server.listen(PORT, () => {
   console.log(`Streaming service is running on http://localhost:${PORT}`);

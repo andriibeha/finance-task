@@ -1,0 +1,61 @@
+.root {
+    font-size: 20px;
+
+    @media (max-width: 750px) {
+        font-size: 15px;
+    }
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 15px;
+    grid-row-gap: 0px;
+}
+
+.item {
+    margin-bottom: 15px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &__red {
+        color: red;
+    }
+
+    &__green {
+        color: green;
+    }
+}
+
+.wraper {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    margin-left: 15px;
+}
+
+.button {
+    background-color: inherit;
+    padding: 5px 10px;
+    font-size: 15px;
+
+    border: 1px solid #fe5f1e;
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: #fe5f1e;
+
+        color: white;
+    }
+
+    @media (max-width: 750px) {
+        font-size: 10px;
+    }
+}

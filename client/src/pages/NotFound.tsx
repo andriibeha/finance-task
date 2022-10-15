@@ -1,8 +1,6 @@
-
-
 const NotFound: React.FC = () => {
     return (
-        <div>404 NotFound!</div>
+        <div className="not_found">404 Not Found!</div>
     );
 };
 

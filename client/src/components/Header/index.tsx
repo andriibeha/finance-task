@@ -1,28 +1,29 @@
 import { Link, useLocation } from "react-router-dom";
-import Serach from "../Search";
-
+import { Props } from "./types";
 import s from "./Header.module.scss";
 
-const Header: React.FC = () => {
+const Header: React.FC<Props> = (props) => {
+    const {search, setSearch} = props;
     const { pathname } = useLocation();
 
     return (
         <header className={s.header}>
             <div>LOGO</div>
             <div>
-                <Serach />
+                <input
+                    className={s.root}
+                    placeholder="Search by Ticker"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
             </div>
             <ul className={s.list}>
-                <li>
-                    <Link to="/" className={pathname === "/" ? s.item__active : s.item}>
-                        Home
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/interesting" className={pathname === "/interesting" ? s.item__active : s.item}>
-                        Interesting
-                    </Link>
-                </li>
+                <Link to="/" className={pathname === "/" ? s.item__active : s.item}>
+                    Home
+                </Link>
+                <Link to="/interesting" className={pathname === "/interesting" ? s.item__active : s.item}>
+                    Interesting
+                </Link>
             </ul>
         </header>
     );

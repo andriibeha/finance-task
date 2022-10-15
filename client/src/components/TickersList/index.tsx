@@ -1,63 +1,43 @@
+import { FC, useCallback } from "react";
 import { useSelector } from "react-redux";
+import { selectInterestingData } from "../../redux/selectors/selectInterestingData";
 import { selectTickerData } from "../../redux/selectors/selectTickerData";
 import { addItem } from "../../redux/slices/interestingSlice";
 import { TickersItems } from "../../redux/slices/tickersSlice";
 import { useAppDispatch } from "../../redux/store";
+import { Loader } from "../Loader";
+import { TickerItem } from "../TickerItem";
+import { Props } from "./types";
 
 import s from "./TickersList.module.scss";
 
-const TickersList: React.FC = () => {
+const TickersList: FC<Props> = (props) => {
+    const {search} = props;
     const dispatch = useAppDispatch();
     const tickers = useSelector(selectTickerData);
+    const interestingIds = useSelector(selectInterestingData);
 
-    const onButtonAddClick = (ticker: TickersItems) => {
+    const onButtonAddClick = useCallback((ticker: TickersItems) => {
         dispatch(addItem(ticker));
-    };
+    },[dispatch]);
 
-    if (tickers.length === 0) { 
-        return (
-            <div className={s.root}>
-                <div className={s.center}>
-                    <div className={s.loader}></div>
-                </div>
-            </div>
-        );
-    };
+    const filterList = useCallback((list:TickersItems[], filter:string) => 
+        list?.filter(item => filter.length ?
+            item.ticker.toLowerCase().search(filter.toLowerCase()) >= 0
+            : true) || []
+    ,[]);
 
+    if (tickers.length === 0) return (<Loader />);  
+    
     return (
         <div className={s.root}>
-            {tickers.map((item) => (
-                <ul className={s.list} key={item.ticker}>
-                    <li className={s.item}>
-                        {item.ticker}
-                    </li>
-                    <li className={s.item}>
-                        ${item.price}
-                    </li>
-                    <li className={s.item}>
-                        <div className={Number(item.change) > 0 ? s.item__green : s.item__red}>
-                            {item.change}
-                        </div>
-                    </li>
-                    <li className={s.item}>
-                        <div className={Number(item.change) > 0 ? s.item__green : s.item__red}>
-                            {item.change_percent}%
-                        </div>
-                    </li>
-                    <li className={s.item}>
-                        <div className={s.wraper}>
-                            {item.dividend}
-                            <div className={s.container}>
-                                <button type="button"
-                                    className={s.button}
-                                    onClick={() => onButtonAddClick(item)}>
-                                    add+
-                                </button>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            ))}
+            {filterList(tickers, search).map((item) => <TickerItem
+                key={`key_${item.id}`}
+                item={item}
+                onAddTicker={onButtonAddClick}
+                enable={!interestingIds.includes(item.id)}
+                buttonName='Add+'
+            />)}
         </div>
     );
 };
